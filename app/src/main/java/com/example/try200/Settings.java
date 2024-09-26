@@ -1,10 +1,10 @@
 package com.example.try200;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Settings extends AppCompatActivity {
 
+    Button Back;
     Button Edit;
     Button Save;
     EditText Counter1;
@@ -34,12 +35,18 @@ public class Settings extends AppCompatActivity {
             return insets;
         });
 
+        Back = findViewById(R.id.mockback);
         Edit = findViewById(R.id.Edit);
         Save = findViewById(R.id.Save);
         Counter1 = findViewById(R.id.Counter1);
         Counter2 = findViewById(R.id.Couner2);
         Counter3 = findViewById(R.id.Counter3);
         MaxCount = findViewById(R.id.MaxCount);
+
+        Back.setOnClickListener(view -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        });
 
         Save.setOnClickListener(view -> {
             View b = findViewById(R.id.Save);
