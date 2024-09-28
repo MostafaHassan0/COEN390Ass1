@@ -5,78 +5,60 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import androidx.activity.EdgeToEdge;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView Counter;
-    Button EventA;
-    Button EventB;
-    Button EventC;
-    Button SettingsBt;
-    Button Databt;
-    int count = 0;
-
+    private SharedPreferenceHelper sharedPreferenceHelper;
+    private TextView totalCountTextView;
+    private Button eventButton1, eventButton2, eventButton3, showCountsButton, settingsButton;
+    private int eventCount1 = 0, eventCount2 = 0, eventCount3 = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
-        Counter = findViewById(R.id.Counter);
-        EventA = findViewById(R.id.EventA);
-        EventB = findViewById(R.id.EventB);
-        EventC = findViewById(R.id.EventC);
-        SettingsBt = findViewById(R.id.SettingsBT);
-        Databt = findViewById(R.id.Databt);
+        sharedPreferenceHelper = new SharedPreferenceHelper(this);
+        totalCountTextView = findViewById(R.id.totalCountTextView);
+        eventButton1 = findViewById(R.id.eventButton1);
+        eventButton2 = findViewById(R.id.eventButton2);
+        eventButton3 = findViewById(R.id.eventButton3);
+        showCountsButton = findViewById(R.id.showCountsButton);
+        settingsButton = findViewById(R.id.settingsButton);
 
-        EventA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                count =count+5;
-                Counter.setText("Total Count: "+ count);
-            }
-        });
+        // Load button names from SharedPreferences
+        updateButtonNames();
 
-        EventB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                count =count+10;
-                Counter.setText("Total Count: "+ count);
-            }
-        });
+        eventButton1.setOnClickListener(view -> incrementEventCount(1));
+        eventButton2.setOnClickListener(view -> incrementEventCount(2));
+        eventButton3.setOnClickListener(view -> incrementEventCount(3));
 
-        EventC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                count =count+2;
-                Counter.setText("Total Count: "+ count);
-            }
-        });
-
-        SettingsBt.setOnClickListener(view -> {
-            Intent intent = new Intent(this, Settings.class);
-            startActivity(intent);
-        });
-
-        Databt.setOnClickListener(view ->{
-            Intent intent = new Intent(this, Data.class);
-            startActivity(intent);
-        });
-
-
+        showCountsButton.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, DataActivity.class)));
+        settingsButton.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, SettingsActivity.class)));
     }
 
+    private void incrementEventCount(int event) {
+        switch (event) {
+            case 1: eventCount1++; break;
+            case 2: eventCount2++; break;
+            case 3: eventCount3++; break;
+        }
+        updateTotalCount();
+        sharedPreferenceHelper.saveEventCounts(eventCount1, eventCount2, eventCount3);
+    }
+
+    private void updateTotalCount() {
+        int totalCount = eventCount1 + eventCount2 + eventCount3;
+        totalCountTextView.setText("Total Count: " + totalCount);
+    }
+
+    private void updateButtonNames() {
+        Settings settings = sharedPreferenceHelper.getSettings();
+        if (settings != null) {
+            eventButton1.setText(settings.getButton1Name());
+            eventButton2.setText(settings.getButton2Name());
+            eventButton3.setText(settings.getButton3Name());
+        }
+    }
 }
