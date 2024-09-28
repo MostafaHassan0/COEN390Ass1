@@ -17,14 +17,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import Classes.Setting;
+import Classes.SharedPreferenceHelper;
 
 public class Settings extends AppCompatActivity {
+
+
 
     Button Save;
     EditText Counter1;
     EditText Counter2;
     EditText Counter3;
     EditText MaxCount;
+    private SharedPreferenceHelper sharedPreferenceHelper;
+    Setting settings;
+
 
 
 
@@ -39,6 +46,9 @@ public class Settings extends AppCompatActivity {
             return insets;
         });
 
+        sharedPreferenceHelper = new SharedPreferenceHelper(this);
+
+
 
 
         getSupportActionBar().setTitle("Settings");
@@ -47,6 +57,8 @@ public class Settings extends AppCompatActivity {
         Counter2 = findViewById(R.id.Counter2);
         Counter3 = findViewById(R.id.Counter3);
         MaxCount = findViewById(R.id.MaxCount);
+
+        settings = sharedPreferenceHelper.GetSetting();
 
 
 
@@ -111,17 +123,21 @@ public class Settings extends AppCompatActivity {
             Counter3.setClickable(false);
             MaxCount.setEnabled(false);
             MaxCount.setClickable(false);
+            saveSettings();
         });
 
         return true;
     }
 
+    private void saveSettings() {
+        settings.Set_Counter_Names(new String[]{Counter1.getText().toString(), Counter2.getText().toString(), Counter3.getText().toString()});
+        settings.Set_Max_Count(Integer.valueOf(String.valueOf(MaxCount.getText())));
+        settings.Update_list();
 
+        sharedPreferenceHelper.saveSettings(settings);
 
-
-
-
-
+        Toast.makeText(this, "Settings Saved", Toast.LENGTH_SHORT).show();
+    }
 
 
 

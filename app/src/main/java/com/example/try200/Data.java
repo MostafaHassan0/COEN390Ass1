@@ -15,18 +15,24 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import android.widget.ArrayAdapter;
 
+import Classes.Setting;
+import Classes.SharedPreferenceHelper;
+
 
 public class Data extends AppCompatActivity {
+
+    private SharedPreferenceHelper sharedPreferenceHelper;
     TextView Counter1LB;
     TextView Counter2LB;
     TextView Counter3LB;
     TextView TotalLB;
     ListView ListView;
+    Setting settings;
     boolean name_state = false;
-    int[] events_count = {5,4,3,22};
-    String[] names = {"Event A", "Event B", "Event C"};
-    String[] events_list_names = {"Event A", "Event B", "Event C","Event A", "Event B", "Event C","Event A", "Event B", "Event C","Event A", "Event B", "Event C","Event A", "Event B", "Event C"};
-    String[] events_list_counter = {"1","2","3","1","2","3","1","2","3","1","2","3","1","2","3","1","2","3"};
+//    int[] events_count = {5,4,3,22};
+//    String[] names = {"Event A", "Event B", "Event C"};
+//    String[] events_list_names = {"Event A", "Event B", "Event C","Event A", "Event B", "Event C","Event A", "Event B", "Event C","Event A", "Event B", "Event C","Event A", "Event B", "Event C"};
+//    String[] events_list_counter = {"1","2","3","1","2","3","1","2","3","1","2","3","1","2","3","1","2","3"};
 
 
 
@@ -43,11 +49,19 @@ public class Data extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Data");
 
+        sharedPreferenceHelper = new SharedPreferenceHelper(this);
+
+        settings = sharedPreferenceHelper.GetSetting();
+
         TotalLB = findViewById(R.id.TotalLB);
         Counter1LB = findViewById(R.id.Counter1LB);
         Counter2LB = findViewById(R.id.Counter2LB);
         Counter3LB = findViewById(R.id.Counter3LB);
         ListView = findViewById(R.id.ListView);
+
+        int sum = settings.events_count[0]+settings.events_count[1]+settings.events_count[2];
+
+        TotalLB.setText("Total Count: " + sum);
 
         toggle_name_switch();
 
@@ -70,25 +84,45 @@ public class Data extends AppCompatActivity {
 
 
     public void toggle_name_switch(){
-        ArrayAdapter<String> names_adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, events_list_names);
-        ArrayAdapter<String> counter_adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, events_list_counter);;
+        ArrayAdapter<String> names_adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, settings.events_list_namesEvent);
+        ArrayAdapter<String> counter_adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, settings.events_list_counter);
         if (name_state == false){
-            Counter1LB.setText(names[0]+": "+ events_count[0] + " Events");
-            Counter2LB.setText(names[1]+": "+ events_count[1] + " Events");
-            Counter3LB.setText(names[2]+": "+ events_count[2] + " Events");
+            Counter1LB.setText(settings.Get_Names()[0] + ": " + settings.Get_Events_Count()[0] + " Events");
+            Counter2LB.setText(settings.Get_Names()[1] + ": " + settings.Get_Events_Count()[1] + " Events");
+            Counter3LB.setText(settings.Get_Names()[2] + ": " + settings.Get_Events_Count()[2] + " Events");
+
             ListView.setAdapter(names_adapter);
             name_state = true;
-
-
-
-
         }
+
         else if(name_state == true){
-            Counter1LB.setText("Counter 1: " + events_count[0] + " Events");
-            Counter2LB.setText("Counter 2: " + events_count[1] + " Events");
-            Counter3LB.setText("Counter 3: " + events_count[2] + " Events");
+            Counter1LB.setText("Counter 1: " + settings.events_count[0] + " Events");
+            Counter2LB.setText("Counter 2: " + settings.events_count[1] + " Events");
+            Counter3LB.setText("Counter 3: " + settings.events_count[2] + " Events");
             ListView.setAdapter(counter_adapter);
             name_state = false;
         }
+
+
+//        ArrayAdapter<String> names_adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, events_list_names);
+//        ArrayAdapter<String> counter_adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, events_list_counter);;
+//        if (name_state == false){
+//            Counter1LB.setText(names[0]+": "+ events_count[0] + " Events");
+//            Counter2LB.setText(names[1]+": "+ events_count[1] + " Events");
+//            Counter3LB.setText(names[2]+": "+ events_count[2] + " Events");
+//            ListView.setAdapter(names_adapter);
+//            name_state = true;
+//
+//
+//
+//
+//        }
+//        else if(name_state == true){
+//            Counter1LB.setText("Counter 1: " + events_count[0] + " Events");
+//            Counter2LB.setText("Counter 2: " + events_count[1] + " Events");
+//            Counter3LB.setText("Counter 3: " + events_count[2] + " Events");
+//            ListView.setAdapter(counter_adapter);
+//            name_state = false;
+//        }
     }
 }
