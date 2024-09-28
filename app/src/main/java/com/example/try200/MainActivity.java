@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     Button EventC;
     Button SettingsBt;
     Button Databt;
-    int count = 0;
     Setting setting;
 
 
@@ -59,23 +59,26 @@ public class MainActivity extends AppCompatActivity {
         EventB.setText(setting.Get_Names()[1]);
         EventC.setText(setting.Get_Names()[2]);
 
+        if (setting.Get_Counter() >= setting.Get_Max_Count()){
         EventA.setOnClickListener(view -> {
-            count =count+1;
-            Counter.setText("Total Count: "+ count);
             setting.Inc_Counter(0);
+            Counter.setText("Total Count: "+ setting.Get_Counter());
+            ;
         });
 
         EventB.setOnClickListener(view -> {
-            count =count+5;
-            Counter.setText("Total Count: "+ count);
             setting.Inc_Counter(1);
+            Counter.setText("Total Count: "+ setting.Get_Counter());;
         });
 
         EventC.setOnClickListener(view -> {
-            count =count+10;
-            Counter.setText("Total Count: "+ count);
             setting.Inc_Counter(2);
+            Counter.setText("Total Count: "+ setting.Get_Counter());;
         });
+        }
+        else {
+            Toast.makeText(this, "Maximum Count Reached", Toast.LENGTH_SHORT).show();
+        }
 
         SettingsBt.setOnClickListener(view -> {
             Intent intent = new Intent(this, Settings.class);
