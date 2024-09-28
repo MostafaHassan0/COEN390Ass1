@@ -1,20 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    tools:context=".Data">
 
     <TextView
-        android:id="@+id/totalCountTextView"
+        android:id="@+id/TotalLB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total Count: 0"
-        android:textSize="24sp" />
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="20dp"
+        android:text="total A: 20 events"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Counter3LB" />
+
+    <TextView
+        android:id="@+id/Counter3LB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="20dp"
+        android:text="Counter A: 20 events"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Counter2LB" />
+
+    <TextView
+        android:id="@+id/Counter2LB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="20dp"
+        android:text="Counter A: 20 events"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Counter1LB" />
+
+    <TextView
+        android:id="@+id/Counter1LB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="48dp"
+        android:text="Counter A: 20 events"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/eventListView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:id="@+id/ListView"
+        android:layout_width="409dp"
+        android:layout_height="483dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TotalLB" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

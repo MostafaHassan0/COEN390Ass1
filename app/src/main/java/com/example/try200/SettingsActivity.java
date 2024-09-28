@@ -11,21 +11,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private EditText button1Name, button2Name, button3Name, maxEventCount;
+    private EditText counter1EditText, counter2EditText, counter3EditText, maxCountEditText;
     private Button saveButton;
     private SharedPreferenceHelper sharedPreferenceHelper;
-    private boolean isEditMode = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        button1Name = findViewById(R.id.button1Name);
-        button2Name = findViewById(R.id.button2Name);
-        button3Name = findViewById(R.id.button3Name);
-        maxEventCount = findViewById(R.id.maxEventCount);
-        saveButton = findViewById(R.id.saveButton);
+        counter1EditText = findViewById(R.id.Counter1);
+        counter2EditText = findViewById(R.id.Counter2);
+        counter3EditText = findViewById(R.id.Counter3);
+        maxCountEditText = findViewById(R.id.MaxCount);
+        saveButton = findViewById(R.id.Save);
         sharedPreferenceHelper = new SharedPreferenceHelper(this);
 
         loadSettings();
@@ -36,41 +35,41 @@ public class SettingsActivity extends AppCompatActivity {
     private void loadSettings() {
         Settings settings = sharedPreferenceHelper.getSettings();
         if (settings != null) {
-            button1Name.setText(settings.getButton1Name());
-            button2Name.setText(settings.getButton2Name());
-            button3Name.setText(settings.getButton3Name());
-            maxEventCount.setText(String.valueOf(settings.getMaxEventCount()));
+            counter1EditText.setText(settings.getButton1Name());
+            counter2EditText.setText(settings.getButton2Name());
+            counter3EditText.setText(settings.getButton3Name());
+            maxCountEditText.setText(String.valueOf(settings.getMaxEventCount()));
         }
     }
 
     private void saveSettings() {
-        String btn1Name = button1Name.getText().toString().trim();
-        String btn2Name = button2Name.getText().toString().trim();
-        String btn3Name = button3Name.getText().toString().trim();
-        String maxCountStr = maxEventCount.getText().toString().trim();
+        String counter1Name = counter1EditText.getText().toString().trim();
+        String counter2Name = counter2EditText.getText().toString().trim();
+        String counter3Name = counter3EditText.getText().toString().trim();
+        String maxCountStr = maxCountEditText.getText().toString().trim();
 
-        if (isValidInput(btn1Name, btn2Name, btn3Name, maxCountStr)) {
+        if (isValidInput(counter1Name, counter2Name, counter3Name, maxCountStr)) {
             int maxCount = Integer.parseInt(maxCountStr);
-            Settings settings = new Settings(btn1Name, btn2Name, btn3Name, maxCount);
+            Settings settings = new Settings(counter1Name, counter2Name, counter3Name, maxCount);
             sharedPreferenceHelper.saveSettings(settings);
             Toast.makeText(this, "Settings Saved!", Toast.LENGTH_SHORT).show();
-            finish(); // Close the activity and return to the previous one
+            finish(); // Close the activity after saving
         } else {
             Toast.makeText(this, "Invalid input!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private boolean isValidInput(String btn1Name, String btn2Name, String btn3Name, String maxCountStr) {
-        if (maxCountStr.isEmpty()) return false; // Check if max count is empty
+    private boolean isValidInput(String counter1Name, String counter2Name, String counter3Name, String maxCountStr) {
+        if (maxCountStr.isEmpty()) return false;
         int maxCount;
         try {
             maxCount = Integer.parseInt(maxCountStr);
         } catch (NumberFormatException e) {
-            return false; // Not a valid integer
+            return false;
         }
-        return btn1Name.matches("[a-zA-Z ]{1,20}") &&
-                btn2Name.matches("[a-zA-Z ]{1,20}") &&
-                btn3Name.matches("[a-zA-Z ]{1,20}") &&
+        return counter1Name.matches("[a-zA-Z ]{1,10}") &&
+                counter2Name.matches("[a-zA-Z ]{1,10}") &&
+                counter3Name.matches("[a-zA-Z ]{1,10}") &&
                 (maxCount >= 5 && maxCount <= 200);
     }
 
@@ -82,19 +81,10 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_edit) {
-            toggleEditMode();
+        if (item.getItemId() == R.id.Edit) {
+            // Add your logic for edit action if needed
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void toggleEditMode() {
-        isEditMode = !isEditMode;
-        button1Name.setEnabled(isEditMode);
-        button2Name.setEnabled(isEditMode);
-        button3Name.setEnabled(isEditMode);
-        maxEventCount.setEnabled(isEditMode);
-        saveButton.setVisibility(isEditMode ? View.VISIBLE : View.GONE);
     }
 }

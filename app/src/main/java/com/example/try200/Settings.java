@@ -1,7 +1,6 @@
 package com.example.try200;
 
 public class Settings {
-
     private String button1Name;
     private String button2Name;
     private String button3Name;

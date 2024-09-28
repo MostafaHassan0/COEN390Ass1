@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,20 +17,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
-
         setContentView(R.layout.activity_main);
 
         sharedPreferenceHelper = new SharedPreferenceHelper(this);
-        totalCountTextView = findViewById(R.id.totalCountTextView);
-        eventButton1 = findViewById(R.id.eventButton1);
-        eventButton2 = findViewById(R.id.eventButton2);
-        eventButton3 = findViewById(R.id.eventButton3);
-        showCountsButton = findViewById(R.id.showCountsButton);
-        settingsButton = findViewById(R.id.settingsButton);
+        totalCountTextView = findViewById(R.id.Counter);
+        eventButton1 = findViewById(R.id.EventA);
+        eventButton2 = findViewById(R.id.EventB);
+        eventButton3 = findViewById(R.id.EventC);
+        showCountsButton = findViewById(R.id.Databt);
+        settingsButton = findViewById(R.id.SettingsBT);
 
         // Load button names from SharedPreferences
         updateButtonNames();
@@ -42,16 +35,7 @@ public class MainActivity extends AppCompatActivity {
         eventButton3.setOnClickListener(view -> incrementEventCount(3));
 
         showCountsButton.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, DataActivity.class)));
-        settingsButton.setOnClickListener(view -> startActivityForResult(new Intent(MainActivity.this, SettingsActivity.class), 1));
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        // Refresh button names if coming back from SettingsActivity
-        if (requestCode == 1) {
-            updateButtonNames();
-        }
+        settingsButton.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, SettingsActivity.class)));
     }
 
     private void incrementEventCount(int event) {

@@ -2,7 +2,6 @@ package com.example.try200;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -42,9 +41,16 @@ public class SharedPreferenceHelper {
         editor.putInt("eventCount1", count1);
         editor.putInt("eventCount2", count2);
         editor.putInt("eventCount3", count3);
-        // Save the event history (you might need to change how you store this)
-        editor.putString("eventHistory", String.join(",", getEventHistory()));
         editor.apply();
+    }
+
+    public int getEventCount(int event) {
+        switch (event) {
+            case 1: return sharedPreferences.getInt("eventCount1", 0);
+            case 2: return sharedPreferences.getInt("eventCount2", 0);
+            case 3: return sharedPreferences.getInt("eventCount3", 0);
+            default: return 0;
+        }
     }
 
     public List<String> getEventHistory() {
@@ -53,11 +59,5 @@ public class SharedPreferenceHelper {
             return new ArrayList<>();
         }
         return Arrays.asList(eventHistory.split(","));
-    }
-
-    public int getTotalEventCount() {
-        return sharedPreferences.getInt("eventCount1", 0) +
-                sharedPreferences.getInt("eventCount2", 0) +
-                sharedPreferences.getInt("eventCount3", 0);
     }
 }

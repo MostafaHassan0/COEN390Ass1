@@ -1,45 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/SettingsBT"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="152dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="600dp"
+        android:text="Settings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.812"
+        android:onClick="goToAnotherActivity"/>
+
+    <Button
+        android:id="@+id/EventC"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="148dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="100dp"
+        android:text="Counter 3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/EventB"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="148dp"
+        android:layout_height="67dp"
+        android:text="Counter 2"
+        app:layout_constraintBottom_toTopOf="@+id/EventC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EventA" />
+
+    <Button
+        android:id="@+id/EventA"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="148dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="500dp"
+        android:text="Counter 1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SettingsBT" />
 
     <TextView
-        android:id="@+id/totalCountTextView"
+        android:id="@+id/Counter"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="44dp"
         android:text="Total Count: 0"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.729" />
 
     <Button
-        android:id="@+id/eventButton1"
+        android:id="@+id/Databt"
+        style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Event 1" />
+        android:layout_marginBottom="68dp"
+        android:text="Show My Counts"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="#9E28B3" />
 
-    <Button
-        android:id="@+id/eventButton2"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Event 2" />
+        android:text="Counter Boy"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 
-    <Button
-        android:id="@+id/eventButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Event 3" />
-
-    <Button
-        android:id="@+id/showCountsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Show My Counts" />
-
-    <Button
-        android:id="@+id/settingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Settings" />
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
