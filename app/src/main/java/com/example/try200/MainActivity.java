@@ -55,6 +55,10 @@ public class MainActivity extends AppCompatActivity {
         SettingsBt = findViewById(R.id.SettingsBT);
         Databt = findViewById(R.id.Databt);
 
+        EventA.setText(setting.Get_Names()[0]);
+        EventB.setText(setting.Get_Names()[1]);
+        EventC.setText(setting.Get_Names()[2]);
+
         EventA.setOnClickListener(view -> {
             count =count+1;
             Counter.setText("Total Count: "+ count);
@@ -82,21 +86,10 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, Data.class);
             startActivity(intent);
         });
-       // String name = sharedPreferenceHelper.getProfileName();
-//        Intent intent1 = getIntent();
-//        String str = intent1.getStringExtra(":message_key");
-//        EventB.setText(str);
 
 
 
     }
 
-
-
-//    public void Countincre(){
-//        if (count < 200){
-//
-//        }
-//    }
 
 }
