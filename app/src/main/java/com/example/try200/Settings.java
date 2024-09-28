@@ -2,9 +2,12 @@ package com.example.try200;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,14 +17,20 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Settings extends AppCompatActivity {
 
-    Button Back;
-    Button Edit;
+    //Button Edit;
+    //MenuItem Edit;
     Button Save;
     EditText Counter1;
     EditText Counter2;
     EditText Counter3;
     EditText MaxCount;
 
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater(); //this adds items to the action bar if it is present.
+        inflater.inflate(R.menu.settings_menu, menu);
+        return true;
+    }
 
 
     @Override
@@ -35,22 +44,36 @@ public class Settings extends AppCompatActivity {
             return insets;
         });
 
-        Back = findViewById(R.id.mockback);
-        Edit = findViewById(R.id.Edit);
+
+
+        getSupportActionBar().setTitle("Settings");
+        //Edit = findViewById(R.id.Edit);
         Save = findViewById(R.id.Save);
         Counter1 = findViewById(R.id.Counter1);
-        Counter2 = findViewById(R.id.Couner2);
+        Counter2 = findViewById(R.id.Counter2);
         Counter3 = findViewById(R.id.Counter3);
         MaxCount = findViewById(R.id.MaxCount);
+        // Edit = findViewById(R.id.Edit);
 
-        Back.setOnClickListener(view -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        });
+
 
         Save.setOnClickListener(view -> {
-            View b = findViewById(R.id.Save);
-            b.setVisibility(View.GONE);
+            int num =  Integer.valueOf(String.valueOf(MaxCount.getText()));
+            while (num > 200 ){
+                Toast.makeText(this,"Maximum Count is 200",Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+
+
+//            String eventname = Counter2.getText().toString();
+//            Intent intent1 = new Intent(getApplicationContext(), MainActivity.class);
+//            intent1.putExtra("message_key",eventname);
+
+
+
+
+            Save.setVisibility(View.GONE);
             Counter1.setEnabled(false);
             Counter1.setClickable(false);
             Counter2.setEnabled(false);
@@ -60,44 +83,58 @@ public class Settings extends AppCompatActivity {
             MaxCount.setEnabled(false);
             MaxCount.setClickable(false);
 
-
-        });
-
-        Edit.setOnClickListener(view -> {
-            View b = findViewById(R.id.Save);
-            b.setVisibility(View.VISIBLE);
-            Counter1.setEnabled(true);
-            Counter1.setClickable(true);
-            Counter2.setEnabled(true);
-            Counter2.setClickable(true);
-            Counter3.setEnabled(true);
-            Counter3.setClickable(true);
-            MaxCount.setEnabled(true);
-            MaxCount.setClickable(true);
-
         });
 
 
-
-
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayOptions(true);
-
-//        NavController navController = Navigation.findNavController(this, R.id.);
+//        Edit.setOnActionExpandListener(View ) {
+//            View b = findViewById(R.id.Save);
+//            b.setVisibility(View.VISIBLE);
+//            Counter1.setEnabled(true);
+//            Counter1.setClickable(true);
+//            Counter2.setEnabled(true);
+//            Counter2.setClickable(true);
+//            Counter3.setEnabled(true);
+//            Counter3.setClickable(true);
+//            MaxCount.setEnabled(true);
+//            MaxCount.setClickable(true);
 //
-//        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-//                .build();
-//        NavigationUI.setupWithNavController(binding.myToolbar, navController, appBarConfiguration);
+//        });
+
 
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        if (item.getItemId()==android.R.id.home){
-//            finish();
+
+
+
+
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle item selection.
+//        switch (item.getItemId()) {
+//            case R.id.Edit_item:
+////                View b = findViewById(R.id.Save);
+//                Save.setVisibility(View.VISIBLE);
+//                Counter1.setEnabled(true);
+//                Counter1.setClickable(true);
+//                Counter2.setEnabled(true);
+//                Counter2.setClickable(true);
+//                Counter3.setEnabled(true);
+//                Counter3.setClickable(true);
+//                MaxCount.setEnabled(true);
+//                MaxCount.setClickable(true);
+//                return true;
+//
+//            default:
+//                return true;
 //        }
-//        return super.onOptionsItemSelected(item);
 //    }
+
+
+
+
+
+
+
+
+
+
 }

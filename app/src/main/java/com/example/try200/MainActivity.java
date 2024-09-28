@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import com.example.try200.Settings;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -12,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     Button SettingsBt;
     Button Databt;
     int count = 0;
+
 
 
     @Override
@@ -35,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        getSupportActionBar().hide();
+
         Counter = findViewById(R.id.Counter);
         EventA = findViewById(R.id.EventA);
         EventB = findViewById(R.id.EventB);
@@ -42,28 +48,19 @@ public class MainActivity extends AppCompatActivity {
         SettingsBt = findViewById(R.id.SettingsBT);
         Databt = findViewById(R.id.Databt);
 
-        EventA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                count =count+5;
-                Counter.setText("Total Count: "+ count);
-            }
+        EventA.setOnClickListener(view -> {
+            count =count+5;
+            Counter.setText("Total Count: "+ count);
         });
 
-        EventB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                count =count+10;
-                Counter.setText("Total Count: "+ count);
-            }
+        EventB.setOnClickListener(view -> {
+            count =count+10;
+            Counter.setText("Total Count: "+ count);
         });
 
-        EventC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                count =count+2;
-                Counter.setText("Total Count: "+ count);
-            }
+        EventC.setOnClickListener(view -> {
+            count =count+2;
+            Counter.setText("Total Count: "+ count);
         });
 
         SettingsBt.setOnClickListener(view -> {
@@ -76,7 +73,18 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+//        Intent intent1 = getIntent();
+//        String str = intent1.getStringExtra(":message_key");
+//        EventB.setText(str);
 
+
+
+    }
+
+    public void Countincre(){
+        if (count < 200){
+
+        }
     }
 
 }
