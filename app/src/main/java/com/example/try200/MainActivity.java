@@ -81,10 +81,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void Countincre(){
-        if (count < 200){
-
-        }
-    }
+//    public void Countincre(){
+//        if (count < 200){
+//
+//        }
+//    }
 
 }
