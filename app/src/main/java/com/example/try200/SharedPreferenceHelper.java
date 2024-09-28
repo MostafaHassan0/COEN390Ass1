@@ -42,6 +42,8 @@ public class SharedPreferenceHelper {
         editor.putInt("eventCount1", count1);
         editor.putInt("eventCount2", count2);
         editor.putInt("eventCount3", count3);
+        // Save the event history (you might need to change how you store this)
+        editor.putString("eventHistory", String.join(",", getEventHistory()));
         editor.apply();
     }
 

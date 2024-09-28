@@ -44,23 +44,34 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void saveSettings() {
-        String btn1Name = button1Name.getText().toString();
-        String btn2Name = button2Name.getText().toString();
-        String btn3Name = button3Name.getText().toString();
-        int maxCount = Integer.parseInt(maxEventCount.getText().toString());
+        String btn1Name = button1Name.getText().toString().trim();
+        String btn2Name = button2Name.getText().toString().trim();
+        String btn3Name = button3Name.getText().toString().trim();
+        String maxCountStr = maxEventCount.getText().toString().trim();
 
-        if (isValidInput(btn1Name, btn2Name, btn3Name, maxCount)) {
+        if (isValidInput(btn1Name, btn2Name, btn3Name, maxCountStr)) {
+            int maxCount = Integer.parseInt(maxCountStr);
             Settings settings = new Settings(btn1Name, btn2Name, btn3Name, maxCount);
             sharedPreferenceHelper.saveSettings(settings);
             Toast.makeText(this, "Settings Saved!", Toast.LENGTH_SHORT).show();
+            finish(); // Close the activity and return to the previous one
         } else {
             Toast.makeText(this, "Invalid input!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private boolean isValidInput(String btn1Name, String btn2Name, String btn3Name, int maxCount) {
-        return btn1Name.matches("[a-zA-Z ]{1,20}") && btn2Name.matches("[a-zA-Z ]{1,20}") &&
-                btn3Name.matches("[a-zA-Z ]{1,20}") && (maxCount >= 5 && maxCount <= 200);
+    private boolean isValidInput(String btn1Name, String btn2Name, String btn3Name, String maxCountStr) {
+        if (maxCountStr.isEmpty()) return false; // Check if max count is empty
+        int maxCount;
+        try {
+            maxCount = Integer.parseInt(maxCountStr);
+        } catch (NumberFormatException e) {
+            return false; // Not a valid integer
+        }
+        return btn1Name.matches("[a-zA-Z ]{1,20}") &&
+                btn2Name.matches("[a-zA-Z ]{1,20}") &&
+                btn3Name.matches("[a-zA-Z ]{1,20}") &&
+                (maxCount >= 5 && maxCount <= 200);
     }
 
     @Override
