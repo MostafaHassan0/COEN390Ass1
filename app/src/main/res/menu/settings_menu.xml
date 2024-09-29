@@ -4,6 +4,6 @@
     <item
         android:id="@+id/Edit"
         android:title="Edit Settings"
-        app:showAsAction="never" /> <!-- never so that the three dots menu is shown -->
+        app:showAsAction="ifRoom" /> <!-- never so that the three dots menu is shown -->
 
 </menu>

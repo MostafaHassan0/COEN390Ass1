@@ -133,4 +133,13 @@ public class SharedPreferenceHelper {
         saveEventList(event); // Add that event to event List
     }
 
+    // Method to reset all event counts to 0 and clear the event list
+    public void ResetEventCount() {
+        sharedPreferences.edit().putInt("eventCount1", 0).apply();
+        sharedPreferences.edit().putInt("eventCount2", 0).apply();
+        sharedPreferences.edit().putInt("eventCount3", 0).apply();
+        sharedPreferences.edit().putString("eventList", "").apply();
+
+    }
+
 }

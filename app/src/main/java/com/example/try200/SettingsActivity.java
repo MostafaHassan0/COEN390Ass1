@@ -2,12 +2,15 @@ package com.example.try200;
 
 import static android.text.TextUtils.isEmpty;
 
+
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,7 +39,7 @@ public class SettingsActivity extends AppCompatActivity {
         maxCount = findViewById(R.id.MaxCount);
         Save = findViewById(R.id.Save);
 
-        sharedPreferenceHelper = new SharedPreferenceHelper(this); // Initialize SharedPreferenceHelper to the one in MainActivity
+            sharedPreferenceHelper = new SharedPreferenceHelper(this); // Initialize SharedPreferenceHelper to the one in MainActivity
         loadSettings(); // Load the saved settings from SharedPreferences
 
         Save.setVisibility(View.VISIBLE); // Make Save button visible. Removing that line made the Save button invisible and you need to click Edit first.
@@ -99,9 +102,9 @@ public class SettingsActivity extends AppCompatActivity {
     // Menu Item Click Handler
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.Edit) { // Target the Edit button
+        if (item.getItemId() == R.id.Edit) {// Target the Edit button
             EditMode(true); // Enable the EditText fields
-            Save.setVisibility(View.VISIBLE); // Make Save button visible
+            Save.setVisibility(View.VISIBLE);// Make Save button visible
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -113,6 +116,5 @@ public class SettingsActivity extends AppCompatActivity {
         counter2.setEnabled(editable);
         counter3.setEnabled(editable);
         maxCount.setEnabled(editable);
-
     }
 }
