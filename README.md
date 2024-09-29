@@ -29,6 +29,7 @@ Activity_Data.xml:
 Please note that the original name of the project was try200, but we have changed it to Counter Boy in a later stage of the project, hence the naming of the folders is still try200, while the app is Counter boy.
 
 The following are some stuff we would like to improve even if it is tolerated y the corrector.
+
 bugs:
 - Clicking Buttons without saving the settings first crashes the app,
 - Save button doesn't want to disappear after the first run of the settings activity.
@@ -36,8 +37,10 @@ bugs:
 Bug area:
 - SharedPrefrenceshelper
 - onCreat in SettingsActivity
+
 Sources of bugs:
 My limited understanding of the SharedPrefrences class and how it operates. As well as the lifecycle of an activity.
+
 expected behaviour:
 - The Counter to increment normally without crashing, even if there is no settings saved yet.
 - Save button to appear when it's the first time SettingsActivity is running, then it disappears and only become visible when Edit is clicked.
