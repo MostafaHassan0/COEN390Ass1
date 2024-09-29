@@ -5,6 +5,7 @@ public class Settings {
     private String button2Name;
     private String button3Name;
     private int maxEventCount;
+    private int[] eventList;
 
 
     public Settings(String button1Name, String button2Name, String button3Name, int maxEventCount) {
@@ -29,5 +30,12 @@ public class Settings {
     public int getMaxEventCount() {
         return maxEventCount;
     }
+    public int[] getEventList() {
+        return eventList;
+    }
+    public void setEventList(int[] eventList) {
+        this.eventList = eventList;
+    }
+
 
 }

@@ -33,6 +33,8 @@ public class SettingsActivity extends AppCompatActivity {
         loadSettings();
 
 
+
+        Save.setVisibility(View.VISIBLE);
         Save.setOnClickListener(view -> saveSettings());
 
     }

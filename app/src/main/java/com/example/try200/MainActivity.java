@@ -48,11 +48,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void incrementEventCount(int event) {
-        if ( updateTotalCount() < sharedPreferenceHelper.getSettings().getMaxEventCount()){
+        Settings settings = sharedPreferenceHelper.getSettings();
+        if (settings != null) {
+
+        if ( updateTotalCount() < sharedPreferenceHelper.getSettings().getMaxEventCount(                                          )){
         sharedPreferenceHelper.IncrementEventCount(event);
             updateTotalCount();
         } else {
             Toast.makeText(this,"Maximum Count Reached",Toast.LENGTH_SHORT).show();
+        }
+        }else {
+            Toast.makeText(this,"Settings Not Set",Toast.LENGTH_SHORT).show();
         }
     }
 

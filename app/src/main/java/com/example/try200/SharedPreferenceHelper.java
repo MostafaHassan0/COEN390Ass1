@@ -53,6 +53,44 @@ public class SharedPreferenceHelper {
         }
     }
 
+    public void setToggleStat(boolean status) {
+        sharedPreferences.edit().putBoolean("toggleStatus", status).apply();
+    }
+
+    public boolean getToggleStat() {
+        return sharedPreferences.getBoolean("toggleStatus", true);
+    }
+
+
+    public void saveEventList(int x) {
+        String eventList = sharedPreferences.getString("eventList", "");
+        if (eventList.isEmpty()) {
+            sharedPreferences.edit().putString("eventList", String.valueOf(x)).apply();
+        } else {
+            String[] stringArray = eventList.split(",");
+            List<String> temp = new ArrayList<>(Arrays.asList(stringArray));
+            temp.add(String.valueOf(x));
+            String newEventList = String.join(",", temp);
+            sharedPreferences.edit().putString("eventList", newEventList).apply();
+            }
+    }
+
+
+    public List<String> getEventList() {
+        String eventList = sharedPreferences.getString("eventList", "");
+        List<String> temp;
+        if (eventList.isEmpty()) {
+            temp = new ArrayList<>();
+        } else {
+            String[] stringArray = eventList.split(",");
+            temp = new ArrayList<>();
+            for (String i : stringArray) {
+                temp.add(String.valueOf(i.trim()));
+            }
+        }
+        return temp;
+    }
+
     public void IncrementEventCount(int event) {
         switch (event) {
             case 1:
@@ -70,21 +108,7 @@ public class SharedPreferenceHelper {
                 count3++;
                 sharedPreferences.edit().putInt("eventCount3", count3).apply();
                 break; }
+        saveEventList(event);
     }
 
-    public boolean isAppRunFistTime(){
-        return sharedPreferences.getBoolean("firstrun",true);
-    }
-
-    public void setAppRunFirstTime(boolean firstRun){
-        sharedPreferences.edit().putBoolean("firstrun",firstRun).apply();
-    }
-
-    public List<String> getEventHistory() {
-        String eventHistory = sharedPreferences.getString("eventHistory", "");
-        if (eventHistory.isEmpty()) {
-            return new ArrayList<>();
-        }
-        return Arrays.asList(eventHistory.split(","));
-    }
 }
