@@ -6,6 +6,7 @@ public class Settings {
     private String button3Name;
     private int maxEventCount;
 
+
     public Settings(String button1Name, String button2Name, String button3Name, int maxEventCount) {
         this.button1Name = button1Name;
         this.button2Name = button2Name;
@@ -28,4 +29,5 @@ public class Settings {
     public int getMaxEventCount() {
         return maxEventCount;
     }
+
 }

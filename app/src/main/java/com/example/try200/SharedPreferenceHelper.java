@@ -53,6 +53,33 @@ public class SharedPreferenceHelper {
         }
     }
 
+    public void IncrementEventCount(int event) {
+        switch (event) {
+            case 1:
+                int count1 = sharedPreferences.getInt("eventCount1", 0);
+                count1++;
+                sharedPreferences.edit().putInt("eventCount1", count1).apply();
+                break;
+            case 2:
+                int count2 = sharedPreferences.getInt("eventCount2", 0);
+                count2++;
+                sharedPreferences.edit().putInt("eventCount2", count2).apply();
+                break;
+            case 3:
+                int count3 = sharedPreferences.getInt("eventCount3", 0);
+                count3++;
+                sharedPreferences.edit().putInt("eventCount3", count3).apply();
+                break; }
+    }
+
+    public boolean isAppRunFistTime(){
+        return sharedPreferences.getBoolean("firstrun",true);
+    }
+
+    public void setAppRunFirstTime(boolean firstRun){
+        sharedPreferences.edit().putBoolean("firstrun",firstRun).apply();
+    }
+
     public List<String> getEventHistory() {
         String eventHistory = sharedPreferences.getString("eventHistory", "");
         if (eventHistory.isEmpty()) {

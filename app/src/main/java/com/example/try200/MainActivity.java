@@ -2,63 +2,82 @@ package com.example.try200;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private SharedPreferenceHelper sharedPreferenceHelper;
     private TextView totalCountTextView;
-    private Button eventButton1, eventButton2, eventButton3, showCountsButton, settingsButton;
-    private int eventCount1 = 0, eventCount2 = 0, eventCount3 = 0;
+    private Button eventA, eventB, eventC, showCountsButton, settingsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Hide the action bar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
         sharedPreferenceHelper = new SharedPreferenceHelper(this);
         totalCountTextView = findViewById(R.id.Counter);
-        eventButton1 = findViewById(R.id.EventA);
-        eventButton2 = findViewById(R.id.EventB);
-        eventButton3 = findViewById(R.id.EventC);
+        eventA = findViewById(R.id.EventA);
+        eventB = findViewById(R.id.EventB);
+        eventC = findViewById(R.id.EventC);
         showCountsButton = findViewById(R.id.Databt);
         settingsButton = findViewById(R.id.SettingsBT);
 
         // Load button names from SharedPreferences
         updateButtonNames();
 
-        eventButton1.setOnClickListener(view -> incrementEventCount(1));
-        eventButton2.setOnClickListener(view -> incrementEventCount(2));
-        eventButton3.setOnClickListener(view -> incrementEventCount(3));
 
-        showCountsButton.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, DataActivity.class)));
-        settingsButton.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, SettingsActivity.class)));
+
+        eventA.setOnClickListener(view -> incrementEventCount(1));
+        eventB.setOnClickListener(view -> incrementEventCount(2));
+        eventC.setOnClickListener(view -> incrementEventCount(3));
+
+        showCountsButton.setOnClickListener(view ->
+                startActivity(new Intent(MainActivity.this, DataActivity.class)));
+        settingsButton.setOnClickListener(view ->
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class)));
     }
 
     private void incrementEventCount(int event) {
-        switch (event) {
-            case 1: eventCount1++; break;
-            case 2: eventCount2++; break;
-            case 3: eventCount3++; break;
+        if ( updateTotalCount() < sharedPreferenceHelper.getSettings().getMaxEventCount()){
+        sharedPreferenceHelper.IncrementEventCount(event);
+            updateTotalCount();
+        } else {
+            Toast.makeText(this,"Maximum Count Reached",Toast.LENGTH_SHORT).show();
         }
-        updateTotalCount();
-        sharedPreferenceHelper.saveEventCounts(eventCount1, eventCount2, eventCount3);
     }
 
-    private void updateTotalCount() {
-        int totalCount = eventCount1 + eventCount2 + eventCount3;
+    private int updateTotalCount() {
+        int count1 = sharedPreferenceHelper.getEventCount(1);
+        int count2 = sharedPreferenceHelper.getEventCount(2);
+        int count3 = sharedPreferenceHelper.getEventCount(3);
+        int totalCount = count1 + count2 + count3;
         totalCountTextView.setText("Total Count: " + totalCount);
+        return totalCount;
     }
 
     private void updateButtonNames() {
         Settings settings = sharedPreferenceHelper.getSettings();
         if (settings != null) {
-            eventButton1.setText(settings.getButton1Name());
-            eventButton2.setText(settings.getButton2Name());
-            eventButton3.setText(settings.getButton3Name());
+            eventA.setText(settings.getButton1Name());
+            eventB.setText(settings.getButton2Name());
+            eventC.setText(settings.getButton3Name());
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateButtonNames();
+        updateTotalCount();
     }
 }
