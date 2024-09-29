@@ -1,103 +1,41 @@
 package com.example.try200;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+// Class Settings to hold the settings inputted by the user for the app
+public class Settings {
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+    // Declaring attributes for the settings
+    private String button1Name;
+    private String button2Name;
+    private String button3Name;
+    private int maxEventCount;
 
-public class Settings extends AppCompatActivity {
-
-    Button Back;
-    Button Edit;
-    Button Save;
-    EditText Counter1;
-    EditText Counter2;
-    EditText Counter3;
-    EditText MaxCount;
-
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_settings);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
-        Back = findViewById(R.id.mockback);
-        Edit = findViewById(R.id.Edit);
-        Save = findViewById(R.id.Save);
-        Counter1 = findViewById(R.id.Counter1);
-        Counter2 = findViewById(R.id.Couner2);
-        Counter3 = findViewById(R.id.Counter3);
-        MaxCount = findViewById(R.id.MaxCount);
-
-        Back.setOnClickListener(view -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        });
-
-        Save.setOnClickListener(view -> {
-            View b = findViewById(R.id.Save);
-            b.setVisibility(View.GONE);
-            Counter1.setEnabled(false);
-            Counter1.setClickable(false);
-            Counter2.setEnabled(false);
-            Counter2.setClickable(false);
-            Counter3.setEnabled(false);
-            Counter3.setClickable(false);
-            MaxCount.setEnabled(false);
-            MaxCount.setClickable(false);
-
-
-        });
-
-        Edit.setOnClickListener(view -> {
-            View b = findViewById(R.id.Save);
-            b.setVisibility(View.VISIBLE);
-            Counter1.setEnabled(true);
-            Counter1.setClickable(true);
-            Counter2.setEnabled(true);
-            Counter2.setClickable(true);
-            Counter3.setEnabled(true);
-            Counter3.setClickable(true);
-            MaxCount.setEnabled(true);
-            MaxCount.setClickable(true);
-
-        });
-
-
-
-
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayOptions(true);
-
-//        NavController navController = Navigation.findNavController(this, R.id.);
-//
-//        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-//                .build();
-//        NavigationUI.setupWithNavController(binding.myToolbar, navController, appBarConfiguration);
-
+    // Constructor to initialize the settings
+    // It's also used as the setter method to set the settings attributes
+    public Settings(String button1Name, String button2Name, String button3Name, int maxEventCount) {
+        this.button1Name = button1Name;
+        this.button2Name = button2Name;
+        this.button3Name = button3Name;
+        this.maxEventCount = maxEventCount;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        if (item.getItemId()==android.R.id.home){
-//            finish();
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    // Getter methods to access the settings attributes
+    public String getButton1Name() {
+        return button1Name;
+    }
+
+    public String getButton2Name() {
+        return button2Name;
+    }
+
+    public String getButton3Name() {
+        return button3Name;
+    }
+
+    public int getMaxEventCount() {
+        return maxEventCount;
+    }
+
+
+
+
 }

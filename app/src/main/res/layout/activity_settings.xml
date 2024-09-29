@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Settings">
+    tools:context=".SettingsActivity">
 
     <TextView
         android:id="@+id/MaxCountLabel"
@@ -13,7 +13,7 @@
         android:layout_height="32dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="40dp"
-        android:text="Maximum Counts"
+        android:text="Maximum Count"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Counter3" />
@@ -27,6 +27,7 @@
         android:ems="10"
         android:hint="Name goes here"
         android:inputType="text"
+        android:maxLength="10"
         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Count3Label" />
@@ -40,10 +41,10 @@
         android:text="Counter 3 Name"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Couner2" />
+        app:layout_constraintTop_toBottomOf="@+id/Counter2" />
 
     <EditText
-        android:id="@+id/Couner2"
+        android:id="@+id/Counter2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -51,6 +52,7 @@
         android:ems="10"
         android:hint="Name goes here"
         android:inputType="text"
+        android:maxLength="10"
         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Counter2Label" />
@@ -71,11 +73,11 @@
         android:layout_width="196dp"
         android:layout_height="32dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="52dp"
         android:text="Counter 1 Name"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/Counter1"
@@ -86,6 +88,7 @@
         android:ems="10"
         android:hint="Name goes here"
         android:inputType="text"
+        android:maxLength="10"
         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Counter1Label" />
@@ -99,20 +102,10 @@
         android:ems="10"
         android:hint="Max count goes here"
         android:inputType="number"
+        android:text="5"
         android:maxLength="3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MaxCountLabel" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="?attr/actionModeCloseDrawable" />
 
     <Button
         android:id="@+id/Save"
@@ -128,25 +121,4 @@
         app:layout_constraintTop_toBottomOf="@+id/MaxCount"
         app:layout_constraintVertical_bias="0.75" />
 
-    <Button
-        android:id="@+id/Edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="mockedit"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/mockback"
-        style="@style/Widget.Material3.Button.Icon"
-        android:layout_width="42dp"
-        android:layout_height="32dp"
-        android:visibility="visible"
-        app:icon="?attr/actionModeCloseDrawable"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/toolbar" />
 </androidx.constraintlayout.widget.ConstraintLayout>
