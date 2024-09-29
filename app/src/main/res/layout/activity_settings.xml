@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Settings">
+    tools:context=".SettingsActivity">
 
     <TextView
         android:id="@+id/MaxCountLabel"
@@ -101,7 +101,6 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Max count goes here"
-        android:text="5"
         android:inputType="number"
         android:maxLength="3"
         app:layout_constraintStart_toStartOf="parent"
