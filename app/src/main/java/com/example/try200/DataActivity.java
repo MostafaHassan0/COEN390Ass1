@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DataActivity extends AppCompatActivity {
@@ -84,6 +85,7 @@ public class DataActivity extends AppCompatActivity {
             }
         }
 
+        Collections.reverse(Eventlist); // Reverse the list to display the most recent events at the top
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Eventlist); // Create an adapter to display EventList in the listview
         listView.setAdapter(adapter); // Set the adapter to the listview
 
